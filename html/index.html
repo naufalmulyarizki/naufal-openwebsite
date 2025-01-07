@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Naufal Open Website</title>
+    <style>
+        body {
+            background: transparent;
+        }
+    </style>
+    <script>
+        window.addEventListener('message', function(event) {
+            if (event.data.type === "openWebsite") {
+                console.log(event.data.link)
+                window.invokeNative('openUrl', event.data.link);
+            }
+        });
+
+        document.addEventListener('keyup', function(event) {
+            if (event.key === "Escape") {
+                fetch(`https://${GetParentResourceName()}/closeWebsite`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
